@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 1% Club Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-blue-900 text-white min-h-screen flex items-center justify-center p-4">
+
+  <div id="intro" class="text-center animate-fade-in transition duration-700 ease-in-out">
+    <h1 class="text-4xl font-bold mb-4">Welcome to The 1% Club Quiz!</h1>
+    <p class="text-lg mb-6">Test your logic and reasoning with 5 questions. You have <span class="font-semibold">60 seconds</span>!</p>
+    <button onclick="startQuiz()" class="bg-yellow-400 text-black px-6 py-2 rounded hover:bg-yellow-300 transition">Start Quiz</button>
+  </div>
+
+  <div id="quiz" class="hidden w-full max-w-xl animate-fade-in">
+    <div id="timer" class="text-right text-lg font-semibold text-red-400 mb-4">Time left: <span id="time">60</span>s</div>
+    <form id="quizForm" class="space-y-6"></form>
+  </div>
+
+  <div id="result" class="hidden text-center animate-fade-in">
+    <h2 class="text-3xl font-bold mb-4">Your Results</h2>
+    <p id="scoreText" class="text-xl mb-6"></p>
+    <button onclick="restartQuiz()" class="bg-green-500 px-6 py-2 rounded hover:bg-green-400 transition">Try Again</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
