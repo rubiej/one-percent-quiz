@@ -128,4 +128,3 @@ function submitQuiz() {
 function restartQuiz() {
   location.reload();
 }
-
