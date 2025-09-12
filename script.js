@@ -126,5 +126,6 @@ function submitQuiz() {
 
 // Restart the quiz
 function restartQuiz() {
-  location.rel
+  location.reload();
+}
 
