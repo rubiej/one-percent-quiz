@@ -31,7 +31,7 @@ let timeLeft = 60;
 let timerInterval;
 
 // Start the quiz
-  window.startQuiz = function() {
+function startQuiz() {
   document.getElementById("intro").classList.add("hidden");
   document.getElementById("quiz").classList.remove("hidden");
   loadQuestions();
@@ -128,4 +128,5 @@ function submitQuiz() {
 function restartQuiz() {
   location.reload();
 }
+
 
