@@ -1,29 +1,9 @@
 const questions = [
-  {
-    text: "Which number is the odd one out?",
-    options: ["2", "4", "6", "9"],
-    answer: "9"
-  },
-  {
-    text: "Which shape has no corners?",
-    options: ["Square", "Triangle", "Circle", "Rectangle"],
-    answer: "Circle"
-  },
-  {
-    text: "Which word doesn’t belong?",
-    options: ["Apple", "Banana", "Carrot", "Grape"],
-    answer: "Carrot"
-  },
-  {
-    text: "What comes next: 2, 4, 8, 16, ?",
-    options: ["18", "24", "32", "36"],
-    answer: "32"
-  },
-  {
-    text: "Which is the mirror image of 'b'?",
-    options: ["d", "p", "q", "g"],
-    answer: "d"
-  }
+  { text: "Which number is the odd one out?", options: ["2", "4", "6", "9"], answer: "9" },
+  { text: "Which shape has no corners?", options: ["Square", "Triangle", "Circle", "Rectangle"], answer: "Circle" },
+  { text: "Which word doesn’t belong?", options: ["Apple", "Banana", "Carrot", "Grape"], answer: "Carrot" },
+  { text: "What comes next: 2, 4, 8, 16, ?", options: ["18", "24", "32", "36"], answer: "32" },
+  { text: "Which is the mirror image of 'b'?", options: ["d", "p", "q", "g"], answer: "d" }
 ];
 
 let currentQuestion = 0;
@@ -32,27 +12,9 @@ let timerInterval;
 
 document.addEventListener("DOMContentLoaded", () => {
   const startButton = document.querySelector("#intro button");
-  const nextBtn = document.createElement("button");
-  const submitBtn = document.createElement("button");
+  const restartButton = document.querySelector("#result button");
 
   startButton.addEventListener("click", startQuiz);
-
-  nextBtn.textContent = "Next";
-  nextBtn.type = "button";
-  nextBtn.id = "nextBtn";
-  nextBtn.className = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400 transition";
-  nextBtn.addEventListener("click", nextQuestion);
-
-  submitBtn.textContent = "Submit Answers";
-  submitBtn.type = "button";
-  submitBtn.id = "submitBtn";
-  submitBtn.className = "bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-400 transition hidden";
-  submitBtn.addEventListener("click", submitQuiz);
-
-  document.getElementById("quizForm").appendChild(nextBtn);
-  document.getElementById("quizForm").appendChild(submitBtn);
-
-  const restartButton = document.querySelector("#result button");
   restartButton.addEventListener("click", restartQuiz);
 });
 
@@ -82,8 +44,25 @@ function loadQuestions() {
       `;
     });
 
-    form.insertBefore(div, document.getElementById("nextBtn"));
+    form.appendChild(div);
   });
+
+  // Create and wire up buttons AFTER questions are loaded
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Next";
+  nextBtn.type = "button";
+  nextBtn.id = "nextBtn";
+  nextBtn.className = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400 transition";
+  nextBtn.addEventListener("click", nextQuestion);
+  form.appendChild(nextBtn);
+
+  const submitBtn = document.createElement("button");
+  submitBtn.textContent = "Submit Answers";
+  submitBtn.type = "button";
+  submitBtn.id = "submitBtn";
+  submitBtn.className = "bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-400 transition hidden";
+  submitBtn.addEventListener("click", submitQuiz);
+  form.appendChild(submitBtn);
 }
 
 function showQuestion(index) {
