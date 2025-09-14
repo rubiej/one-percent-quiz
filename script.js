@@ -30,15 +30,40 @@ let currentQuestion = 0;
 let timeLeft = 60;
 let timerInterval;
 
-window.startQuiz = function() {
+document.addEventListener("DOMContentLoaded", () => {
+  const startButton = document.querySelector("#intro button");
+  const nextBtn = document.createElement("button");
+  const submitBtn = document.createElement("button");
+
+  startButton.addEventListener("click", startQuiz);
+
+  nextBtn.textContent = "Next";
+  nextBtn.type = "button";
+  nextBtn.id = "nextBtn";
+  nextBtn.className = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400 transition";
+  nextBtn.addEventListener("click", nextQuestion);
+
+  submitBtn.textContent = "Submit Answers";
+  submitBtn.type = "button";
+  submitBtn.id = "submitBtn";
+  submitBtn.className = "bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-400 transition hidden";
+  submitBtn.addEventListener("click", submitQuiz);
+
+  document.getElementById("quizForm").appendChild(nextBtn);
+  document.getElementById("quizForm").appendChild(submitBtn);
+
+  const restartButton = document.querySelector("#result button");
+  restartButton.addEventListener("click", restartQuiz);
+});
+
+function startQuiz() {
   document.getElementById("intro").classList.add("hidden");
   document.getElementById("quiz").classList.remove("hidden");
   loadQuestions();
   showQuestion(currentQuestion);
   startTimer();
-};
+}
 
-// Load all questions but hide them initially
 function loadQuestions() {
   const form = document.getElementById("quizForm");
 
@@ -57,27 +82,10 @@ function loadQuestions() {
       `;
     });
 
-    form.appendChild(div);
+    form.insertBefore(div, document.getElementById("nextBtn"));
   });
-
-  const nextBtn = document.createElement("button");
-  nextBtn.textContent = "Next";
-  nextBtn.type = "button";
-  nextBtn.onclick = nextQuestion;
-  nextBtn.id = "nextBtn";
-  nextBtn.className = "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400 transition";
-  form.appendChild(nextBtn);
-
-  const submitBtn = document.createElement("button");
-  submitBtn.textContent = "Submit Answers";
-  submitBtn.type = "button";
-  submitBtn.onclick = submitQuiz;
-  submitBtn.id = "submitBtn";
-  submitBtn.className = "bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-400 transition hidden";
-  form.appendChild(submitBtn);
 }
 
-// Show one question at a time
 function showQuestion(index) {
   document.querySelectorAll(".question").forEach(q => q.classList.add("hidden"));
   document.getElementById(`question${index}`).classList.remove("hidden");
@@ -86,7 +94,6 @@ function showQuestion(index) {
   document.getElementById("submitBtn").classList.toggle("hidden", index !== questions.length - 1);
 }
 
-// Move to next question
 function nextQuestion() {
   if (currentQuestion < questions.length - 1) {
     currentQuestion++;
@@ -94,7 +101,6 @@ function nextQuestion() {
   }
 }
 
-// Timer countdown
 function startTimer() {
   timerInterval = setInterval(() => {
     timeLeft--;
@@ -106,7 +112,6 @@ function startTimer() {
   }, 1000);
 }
 
-// Submit answers and show result
 function submitQuiz() {
   clearInterval(timerInterval);
   document.getElementById("quiz").classList.add("hidden");
@@ -123,10 +128,6 @@ function submitQuiz() {
   document.getElementById("scoreText").textContent = `You scored ${score} out of ${questions.length}.`;
 }
 
-// Restart the quiz
 function restartQuiz() {
   location.reload();
 }
-
-
-
