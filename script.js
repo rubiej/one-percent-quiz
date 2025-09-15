@@ -11,9 +11,8 @@ let timeLeft = 60;
 let timerInterval;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const startButton = document.querySelector("#intro button");
+  const startButton = document.getElementById("startBtn");
   const restartButton = document.querySelector("#result button");
-
   startButton.addEventListener("click", startQuiz);
   restartButton.addEventListener("click", restartQuiz);
 });
@@ -110,3 +109,4 @@ function submitQuiz() {
 function restartQuiz() {
   location.reload();
 }
+
