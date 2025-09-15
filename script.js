@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function startQuiz() {
   document.getElementById("intro").classList.add("hidden");
   document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("quiz").classList.add("animate-soft-fade-in");
   loadQuestions();
   showQuestion(currentQuestion);
   startTimer();
@@ -109,4 +110,5 @@ function submitQuiz() {
 function restartQuiz() {
   location.reload();
 }
+
 
